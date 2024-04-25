@@ -5,9 +5,16 @@ using UnityEngine;
 
 public class PlayerNetwork : NetworkBehaviour
 {
+    [SerializeField] private Transform spawnedObjectPrefab;
+
     private void Update()
     {
         if (!IsOwner) return;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(spawnedObjectPrefab).GetComponent<NetworkObject>().Spawn(true);
+        }
 
         Vector3 moveDirection = new Vector3(0, 0, 0);
 
